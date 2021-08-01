@@ -1,20 +1,49 @@
 {
   "name": "dev-portal",
   "version": "0.1.0",
-  "private": true,
+  "description": "Suisei developer portal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/holores/developer-portal.git"
+  },
+  "author": "GoldElysium",
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "npx husky install && node .husky/link.js",
+    "lint:eslint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "lint:report": "eslint --output-file eslint_report.json --format json ."
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.3",
+    "eslint-config-airbnb-typescript": "^12.3.1",
     "next": "11.0.1",
+    "next-auth": "^3.27.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "tailwindcss": "^2.2.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@types/react": "^17.0.15",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
+    "typescript": "^4.3.5"
   }
 }
