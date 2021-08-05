@@ -1,8 +1,55 @@
 import { AppProps } from 'next/app';
-import '../styles/globals.css';
+import Head from 'next/head';
+import { ThemeProvider } from 'next-themes';
+import { SessionProvider, signIn, useSession } from 'next-auth/react';
+import React, { useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'tailwindcss/tailwind.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
-	return <Component {...pageProps} />;
+interface IAuthProps {
+	children: JSX.Element
 }
 
-export default MyApp;
+function Auth({ children }: IAuthProps): JSX.Element | null {
+	const { data: session, status } = useSession();
+	const isUser = !!session?.user;
+
+	useEffect(() => {
+		console.log(session?.user);
+	}, [session]);
+
+	useEffect(() => {
+		if (status === 'loading') return;
+		if (!isUser) signIn('discord');
+	}, [status, isUser]);
+
+	if (isUser) {
+		return children;
+	}
+
+	return <div>Loading...</div>;
+}
+
+function App({ Component, pageProps }: AppProps) {
+	return (
+		<>
+			<Head>
+				<title>Suisei - dev portal</title>
+			</Head>
+			<ThemeProvider defaultTheme="system" attribute="class">
+				<SessionProvider session={pageProps.session}>
+					{ /* @ts-expect-error auth doesn't exist */ }
+					{Component.auth ? (
+						<Auth>
+							<Component {...pageProps} />
+						</Auth>
+					) : (
+						<Component {...pageProps} />
+					)}
+				</SessionProvider>
+			</ThemeProvider>
+		</>
+	);
+}
+
+export default App;
