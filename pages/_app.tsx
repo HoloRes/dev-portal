@@ -15,10 +15,6 @@ function Auth({ children }: IAuthProps): JSX.Element | null {
 	const isUser = !!session?.user;
 
 	useEffect(() => {
-		console.log(session?.user);
-	}, [session]);
-
-	useEffect(() => {
 		if (status === 'loading') return;
 		if (!isUser) signIn('discord');
 	}, [status, isUser]);
