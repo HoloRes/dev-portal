@@ -1,14 +1,12 @@
 import mongoose from 'mongoose';
-import NextAuth, { DefaultProfile } from 'next-auth';
+import NextAuth, { DefaultProfile, Session } from 'next-auth';
 import Providers from 'next-auth/providers';
-// import { PrismaAdapter } from '@next-auth/prisma-adapter';
-// import * as Prisma from '@prisma/client';
-import UserData from '../../../models/userData';
+import adapter from '../../../next-auth/adapter';
+import { IUser } from '../../../models/userData';
 
 // const prisma = new Prisma.PrismaClient();
 
 interface DiscordProfile extends DefaultProfile {
-	image_url?: string;
 	id: string;
 	avatar: string;
 	username: string;
@@ -25,8 +23,7 @@ try {
 } catch (e) {}
 
 export default NextAuth({
-	debug: true,
-	// adapter: PrismaAdapter(prisma),
+	adapter: adapter(undefined),
 	providers: [
 		Providers.Discord({
 			clientId: process.env.DISCORD_CLIENT_ID,
@@ -36,17 +33,16 @@ export default NextAuth({
 				if (profile.avatar === null) {
 					const defaultAvatarNumber = parseInt(profile.discriminator, 10) % 5;
 					// eslint-disable-next-line no-param-reassign
-					profile.image_url = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarNumber}.png`;
+					profile.image = `https://cdn.discordapp.com/embed/avatars/${defaultAvatarNumber}.png`;
 				} else {
 					const format = profile.avatar.startsWith('a_') ? 'gif' : 'png';
 					// eslint-disable-next-line no-param-reassign
-					profile.image_url = `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.${format}`;
+					profile.image = `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.${format}`;
 				}
 				return {
 					...profile,
 					id: profile.id,
 					name: profile.username,
-					image: profile.image_url,
 				} as DiscordProfile;
 			},
 		}),
@@ -54,35 +50,13 @@ export default NextAuth({
 	callbacks: {
 		async redirect({ baseUrl, url }) {
 			if (url === '/') return baseUrl;
-			return url.startsWith(baseUrl) ? url : `${baseUrl}/${url}`;
+			return url.startsWith(baseUrl) ? url : `${baseUrl}/${url.replace(/^\//, '')}`;
 		},
-		async jwt({ token }) {
-			const doc = await UserData.findById(token.sub).exec();
 
-			if (doc) {
-				// eslint-disable-next-line no-param-reassign
-				token.permissions = doc.permissions;
-				return token;
-			}
-
-			const newDoc = new UserData({
-				_id: token.sub,
-				email: token.email,
-				permissions: [],
-			});
-
-			await newDoc.save((e) => {
-				if (e) throw e;
-			});
-
-			// eslint-disable-next-line no-param-reassign
-			token.permissions = [];
-			return token;
-		},
-		async session({ session, token }) {
+		// @ts-expect-error Types not assignable
+		async session({ session, user }: { session: Session & { user: { permissions: string[] } }, user: IUser }) { // eslint-disable-line max-len
 			// Inject permissions
-			// @ts-expect-error permissions doesn't exist
-			session.user!.permissions = token.permissions; // eslint-disable-line no-param-reassign
+			session.user.permissions = user.permissions; // eslint-disable-line no-param-reassign
 
 			return session;
 		},
