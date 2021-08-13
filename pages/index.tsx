@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { Tab } from '@headlessui/react';
 import { PlusCircleIcon, SearchIcon } from '@heroicons/react/solid';
 import Navbar from '../components/Navbar';
@@ -10,14 +9,8 @@ function classNames(...classes: string[]) {
 
 export default function Dashboard() {
 	const [mounted, setMounted] = useState(false);
-	const { data: session } = useSession();
 
 	useEffect(() => setMounted(true), []);
-
-	useEffect(() => {
-		// eslint-disable-next-line no-console
-		console.log(session);
-	}, [session]);
 
 	if (!mounted) return null;
 
@@ -61,9 +54,9 @@ export default function Dashboard() {
 								)}
 							>
 								{/* TODO: Something similar to DNS editor of Cloudflare */}
-								<div className="flex w-full items-center gap-2">
+								<div className="flex flex-wrap w-full items-center gap-2">
 									<div className="bg-blue-600 px-4 py-1 rounded-lg flex items-center gap-1 h-8 cursor-pointer hover:bg-blue-700 text-white"><PlusCircleIcon height={20} />Add</div>
-									<div className="flex flex-grow w-full rounded-md border border-black items-center bg-white text-black gap-2 px-2 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent">
+									<div className="flex flex-grow rounded-md border border-black items-center bg-white text-black gap-2 px-2 focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent">
 										<SearchIcon height={20} />
 										<input className="flex-grow h-8 focus:outline-none" placeholder="Search API keys"/>
 									</div>
