@@ -34,14 +34,16 @@ function App({ Component, pageProps }: AppProps) {
 			</Head>
 			<ThemeProvider defaultTheme="system" attribute="class">
 				<SessionProvider session={pageProps.session}>
-					{ /* @ts-expect-error auth doesn't exist */ }
-					{Component.auth ? (
-						<Auth>
+					<div className="min-h-screen h-full dark:bg-gray-800 dark:text-white">
+						{ /* @ts-expect-error auth doesn't exist */ }
+						{Component.auth ? (
+							<Auth>
+								<Component {...pageProps} />
+							</Auth>
+						) : (
 							<Component {...pageProps} />
-						</Auth>
-					) : (
-						<Component {...pageProps} />
-					)}
+						)}
+					</div>
 				</SessionProvider>
 			</ThemeProvider>
 		</>
