@@ -52,6 +52,6 @@
     "node-jose-tools": "1.6.28",
     "postcss": "8.3.9",
     "tailwindcss": "2.2.16",
-    "typescript": "4.4.3"
+    "typescript": "4.4.4"
   }
 }
