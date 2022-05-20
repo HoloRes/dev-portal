@@ -49,16 +49,23 @@ export default function Sidebar() {
 				</ul>
 
 				<ul className="menu flex-none gap-2 p-4">
-					<div className="collapse collapse-arrow" tabIndex={0}>
+					<div className="collapse-arrow collapse" tabIndex={0}>
 						<input type="checkbox" />
 						<div className="collapse-title -mt-2 flex items-center gap-4">
-							<Image
-								src={session!.user!.image!}
-								width={48}
-								height={48}
-								className="avatar rounded-full"
-							/>
-							<p className="text-lg">{session!.user!.name}</p>
+							{session?.user && (
+								<>
+									<Image
+										src={session.user.image!}
+										alt="avatar"
+										width={48}
+										height={48}
+										className="avatar rounded-full"
+									/>
+									<p className="text-lg">
+										{session.user.name}
+									</p>
+								</>
+							)}
 						</div>
 						<ul className="collapse-content menu menu-compact">
 							<li
@@ -94,7 +101,7 @@ export default function Sidebar() {
 					<li className="lg:hidden">
 						<label
 							htmlFor="side-drawer"
-							className="drawer-button btn btn-primary rounded-box text-white"
+							className="btn drawer-button btn-primary rounded-box text-white"
 						>
 							<XIcon className="h-6 w-6 text-white" />
 						</label>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Sidebar from '../components/Sidebar';
 
 export default function Dashboard() {
 	const [mounted, setMounted] = useState(false);
@@ -9,10 +8,10 @@ export default function Dashboard() {
 	if (!mounted) return null;
 
 	return (
-		<>
-			<Sidebar />
-			<div></div>
-		</>
+		<div>
+			This is an admin page
+			<br />
+		</div>
 	);
 }
 
