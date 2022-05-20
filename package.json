@@ -1,57 +1,54 @@
 {
-  "name": "dev-portal",
-  "version": "0.1.0",
-  "description": "Suisei developer portal",
-  "repository": {
-    "type": "git",
-    "url": "git+https://bitbucket.org/holores/developer-portal.git"
-  },
-  "author": "GoldElysium",
-  "license": "MIT",
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
-    ]
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "prepare": "npx husky install && node .husky/link.js",
-    "lint:eslint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "lint:report": "eslint --output-file eslint_report.json --format json .",
-    "gen-jwk": "jose newkey -s 512 -t oct -a HS512"
-  },
-  "dependencies": {
-    "@headlessui/react": "1.6.2",
-    "@heroicons/react": "1.0.6",
-    "eslint-config-airbnb-typescript": "12.3.1",
-    "mongoose": "5.13.14",
-    "next": "11.1.4",
-    "next-auth": "4.0.0-next.20",
-    "next-themes": "0.2.0",
-    "nodemailer": "6.7.5",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "13.2.1",
-    "@commitlint/config-conventional": "13.2.0",
-    "@types/react": "17.0.45",
-    "@typescript-eslint/eslint-plugin": "4.33.0",
-    "autoprefixer": "10.4.7",
-    "eslint": "7.32.0",
-    "eslint-config-next": "11.1.4",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsx-a11y": "6.5.1",
-    "eslint-plugin-react": "7.30.0",
-    "eslint-plugin-react-hooks": "4.5.0",
-    "husky": "7.0.4",
-    "node-jose-tools": "1.6.28",
-    "postcss": "8.4.14",
-    "tailwindcss": "2.2.19",
-    "typescript": "4.6.4"
-  }
+	"name": "suisei-developer-portal",
+	"version": "0.1.0",
+	"scripts": {
+		"dev": "next dev -p 3003",
+		"build": "next build",
+		"start": "next start",
+		"prepare": "npx husky install && node .husky/link.js",
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix .",
+		"lint:report": "eslint --output-file eslint_report.json --format json ."
+	},
+	"lint-staged": {
+		"*.{js,ts,jsx,tsx}": [
+			"eslint --fix"
+		]
+	},
+	"dependencies": {
+		"@headlessui/react": "^1.6.2",
+		"@heroicons/react": "1.0.6",
+		"@next-auth/prisma-adapter": "^1.0.3",
+		"@prisma/client": "^3.14.0",
+		"daisyui": "^2.15.0",
+		"minio": "^7.0.28",
+		"next": "12.1.6",
+		"next-auth": "^4.3.4",
+		"next-themes": "^0.2.0",
+		"react": "18.1.0",
+		"react-dom": "18.1.0"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "17.0.0",
+		"@commitlint/config-conventional": "17.0.0",
+		"@types/minio": "7.0.13",
+		"@types/react": "18.0.9",
+		"autoprefixer": "^10.4.7",
+		"eslint": "8.15.0",
+		"eslint-config-airbnb": "19.0.4",
+		"eslint-config-airbnb-typescript": "17.0.0",
+		"eslint-config-next": "12.1.6",
+		"eslint-plugin-import": "2.26.0",
+		"eslint-plugin-jsx-a11y": "6.5.1",
+		"eslint-plugin-react": "7.30.0",
+		"eslint-plugin-react-hooks": "4.5.0",
+		"husky": "8.0.1",
+		"lint-staged": "12.4.1",
+		"postcss": "^8.4.14",
+		"prettier": "2.6.2",
+		"prettier-plugin-tailwindcss": "0.1.11",
+		"prisma": "^3.14.0",
+		"tailwindcss": "^3.0.24",
+		"typescript": "4.6.4"
+	}
 }

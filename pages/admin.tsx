@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 
 export default function Dashboard() {
 	const [mounted, setMounted] = useState(false);
@@ -10,9 +10,8 @@ export default function Dashboard() {
 
 	return (
 		<>
-			<Navbar />
-			<div>
-			</div>
+			<Sidebar />
+			<div></div>
 		</>
 	);
 }

@@ -1,10 +1,11 @@
 module.exports = {
-  extends: [
-    'next', 'next/core-web-vitals', 'airbnb-typescript/base'
-  ],
-  parserOptions: {
-    project: './tsconfig.json'
-  },
+	extends: [
+		'next',
+		'airbnb-typescript',
+	],
+	parserOptions: {
+		project: './tsconfig.json',
+	},
 	rules: {
 		'no-tabs': 'off',
 		indent: 'off',
