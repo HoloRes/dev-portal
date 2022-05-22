@@ -22,12 +22,12 @@ module.exports = {
 			{
 				light: {
 					primary: '#3b66ed',
-					'primary-content': '#06232E',
-					secondary: '#00A0F2',
+					'primary-content': '#E3F5FC',
+					secondary: '#3BBCFF',
 					'secondary-content': '#06232E',
 					accent: '#091540',
 					neutral: '#191D24',
-					'base-100': '#e3f5fc',
+					'base-100': '#E3F5FC',
 					'base-content': '#000',
 					info: '#00A0F2',
 					success: '#9EF48A',

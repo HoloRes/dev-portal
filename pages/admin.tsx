@@ -1,18 +1,13 @@
-import { useEffect, useState } from 'react';
-
-export default function Dashboard() {
-	const [mounted, setMounted] = useState(false);
-
-	useEffect(() => setMounted(true), []);
-
-	if (!mounted) return null;
-
+export default function AdminPage() {
 	return (
-		<div>
+		<div className="layout">
 			This is an admin page
 			<br />
 		</div>
 	);
 }
 
-Dashboard.auth = true;
+AdminPage.options = {
+	auth: true,
+	permission: 'admin',
+};
