@@ -20,7 +20,7 @@
 		"@heroicons/react": "1.0.6",
 		"@next-auth/prisma-adapter": "1.0.3",
 		"@prisma/client": "3.15.1",
-		"daisyui": "2.15.2",
+		"daisyui": "2.15.3",
 		"minio": "7.0.28",
 		"next": "12.1.6",
 		"next-auth": "4.3.4",
