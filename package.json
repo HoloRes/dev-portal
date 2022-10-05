@@ -31,7 +31,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "17.1.2",
 		"@commitlint/config-conventional": "17.1.0",
-		"@types/minio": "7.0.13",
+		"@types/minio": "7.0.14",
 		"@types/react": "18.0.21",
 		"autoprefixer": "10.4.12",
 		"eslint": "8.24.0",
